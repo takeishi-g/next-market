@@ -1,14 +1,17 @@
 import { NextResponse } from "next/server";
 import { jwtVerify } from "jose"
 
+const encodeKey = process.env.ENCODE_KEY
+
 export async function middleware(request) {
   const token =  process.env.TOKEN
+  console.log(encodeKey,token)
   // await request.headers.get("Authorization")?.split(" ")[1]
   if(!token) {
     return NextResponse.json({message: "トークンがありません"})
   }
   try {
-    const secretKey = new TextEncoder().encode("next-market")
+    const secretKey = new TextEncoder().encode(encodeKey)
     const decodeJwt = await jwtVerify(token,secretKey)
     return NextResponse.next()
   }catch(err) {

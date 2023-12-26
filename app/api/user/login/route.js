@@ -3,6 +3,8 @@ import { UserModel } from "@/app/utils/schemaModels";
 import { NextResponse } from "next/server";
 import { SignJWT } from "jose";
 
+const enkodeKey = process.env.ENCODE_KEY
+
 export async function POST(request) {
   const reqBody = await request.json();
 
@@ -14,7 +16,7 @@ export async function POST(request) {
 
       // ユーザーデータが存在する場合の処理
       if (reqBody.password === savedUserData.password) {
-        const secretKey = new TextEncoder().encode("next-market");
+        const secretKey = new TextEncoder().encode(enkodeKey);
         const payload = {
           email: reqBody.email,
         };
@@ -23,7 +25,7 @@ export async function POST(request) {
                                 .setProtectedHeader({ alg: "HS256" })
                                 .setExpirationTime("1d")
                                 .sign(secretKey);
-        console.log(token)
+        // console.log(token)
 
         return NextResponse.json({
           message: "ログイン成功",
