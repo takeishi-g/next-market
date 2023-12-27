@@ -1,5 +1,9 @@
 "use client"
 
+import { useRouter } from "next/navigation"
+
+const router = useRouter
+
 const { useState } = require("react")
 
 const Login = () => {

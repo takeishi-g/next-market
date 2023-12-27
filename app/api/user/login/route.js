@@ -3,11 +3,10 @@ import { UserModel } from "@/app/utils/schemaModels";
 import { NextResponse } from "next/server";
 import { SignJWT } from "jose";
 
-const enkodeKey = process.env.ENCODE_KEY
+const enkodeKey = process.env.NEXT_PUBLIC_ENCODE_KEY
 
 export async function POST(request) {
   const reqBody = await request.json();
-
   try {
     await connectDB();
     const savedUserData = await UserModel.findOne({ email: reqBody.email });
