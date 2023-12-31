@@ -32,6 +32,7 @@ const Register = () => {
         body: JSON.stringify(newUser),
       })
       const jsonData = await responce.json()
+      console.log(newUser)
       alert(jsonData.message)
     }catch(err){
       alert("ユーザー登録失敗")
@@ -47,7 +48,6 @@ const Register = () => {
         <input value={newUser.password} onChange={handleChange} type="text" name="password" placeholder="パスワード" required />
         <button>登録</button>
       </form>
-      {console.log(newUser)}
     </div>
   )
 }
