@@ -5,7 +5,7 @@ import { SignJWT } from "jose";
 
 const enkodeKey = process.env.NEXT_PUBLIC_ENCODE_KEY
 export const corsHeaders = {
-  "Access-Control-Allow-Origin": process.env.NEXT_PUBLIC_URL,
+  "Access-Control-Allow-Origin": "https://next-market-flame.vercel.app/",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type",
 }
