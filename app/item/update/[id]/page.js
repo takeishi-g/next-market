@@ -54,9 +54,9 @@ const UpdataItem = (context) => {
         {
           method: "PUT",
           headers: {
-            Accept: "application/json",
+            "Accept": "application/json",
             "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Authorization": `Bearer ${localStorage.getItem("token")}`,
           },
           body: JSON.stringify(item),
         }

@@ -22,7 +22,7 @@ const Register = () => {
   const handleSubmit =  async (e) => {
     e.preventDefault()
     try{
-      const responce = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/user/register`,
+      const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/user/register`,
       {
         method: "POST",
         headers: {
@@ -31,7 +31,7 @@ const Register = () => {
         },
         body: JSON.stringify(newUser),
       })
-      const jsonData = await responce.json()
+      const jsonData = await response.json()
       alert(jsonData.message)
     }catch(err){
       alert("ユーザー登録失敗")
