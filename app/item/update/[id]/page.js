@@ -53,7 +53,6 @@ const UpdataItem = (context) => {
         `${url}/api/item/update/${context.params.id}`,
         {
           method: "PUT",
-          mode: "cors",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",

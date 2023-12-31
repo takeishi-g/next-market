@@ -4,6 +4,11 @@ import { NextResponse } from "next/server";
 import { SignJWT } from "jose";
 
 const enkodeKey = process.env.NEXT_PUBLIC_ENCODE_KEY
+export const corsHeaders = {
+  "Access-Control-Allow-Origin": process.env.NEXT_PUBLIC_URL,
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+}
 
 export async function POST(request) {
   const reqBody = await request.json();
@@ -27,6 +32,7 @@ export async function POST(request) {
         // console.log(token)
 
         return NextResponse.json({
+          headers: corsHeaders,
           message: "ログイン成功",
           token: token,
         });
