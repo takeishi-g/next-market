@@ -53,3 +53,7 @@ export async function POST(request) {
     });
   }
 }
+
+export async function OPTIONS() {
+  return NextResponse.json({}, {headers:corsHeaders})
+}
