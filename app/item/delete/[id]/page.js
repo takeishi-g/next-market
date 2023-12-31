@@ -1,8 +1,11 @@
 "use client"
 
 import Image from "next/image"
+import useAuth from "@/app/utils/useAuth"
 
 const { useState, useEffect } = require("react")
+const url = process.env.NEXT_PUBLIC_URL
+
 
 const DeleteItem = (context) => {
   // console.log(context)
@@ -15,9 +18,11 @@ const DeleteItem = (context) => {
 
   const [ email, setEmail ] = useState("")
 
+  const loginUserEmail = useAuth()
+
   useEffect(() => {
     const getSingleItem = async(id) => {
-      const response = await fetch(`http://localhost:3000/api/item/readsingle/${id}`,{cache: "no-store"})
+      const response = await fetch(`${url}/api/item/readsingle/${id}`,{cache: "no-store"})
       const jsonData = await response.json()
       const singleItem = jsonData.singleItem
       setItem({
@@ -49,7 +54,7 @@ const DeleteItem = (context) => {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${localStorage.getItem("token")}`
         },
-        body: JSON.stringify(item,email),
+        body: JSON.stringify(item),
       })
       const jsonData = await response.json()
       alert(jsonData.message)
@@ -58,9 +63,11 @@ const DeleteItem = (context) => {
     }
   }
 
-  return (
-    <div>
-      <h1>アイテム削除</h1>
+  if(loginUserEmail === email) {
+
+    return (
+      <div>
+      <h1 className="page-title">アイテム削除</h1>
       <form onSubmit={handleSubmit}>
         <h2>{item.title}</h2>
         <Image src={item.image} width={750} height={500} alt="item-image" priority/>
@@ -70,6 +77,9 @@ const DeleteItem = (context) => {
       </form>
     </div>
   )
+} else {
+  return <h1>権限がありません</h1>
+}
 }
 
 export default DeleteItem

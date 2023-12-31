@@ -4,9 +4,11 @@ import { ItemModel } from "@/app/utils/schemaModels";
 
 export async function PUT(request, context) {
   const reqBody = await request.json()
+  console.log(reqBody)
   try {
     await connectDB()
     const singleItem = await ItemModel.findById(context.params.id)
+    // console.log(singleItem.email)
     if(singleItem.email === reqBody.email) {
       await ItemModel.updateOne({_id: context.params.id}, reqBody)
       return NextResponse.json({

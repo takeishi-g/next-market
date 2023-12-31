@@ -3,6 +3,8 @@
 import { useState } from "react"
 import useAuth from "@/app/utils/useAuth"
 
+const url = process.env.NEXT_PUBLIC_URL
+
 
 const Create = () => {
   const [ item, setItem ] = useState({
@@ -10,6 +12,7 @@ const Create = () => {
     price: "",
     image: "",
     description: "",
+    email: "",
   })
 
   const loginUserEmail = useAuth()
@@ -18,7 +21,7 @@ const Create = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const responce = await fetch("http://localhost:3000/api/item/create", {
+      const responce = await fetch(`${url}/api/item/create`, {
         method: "POST",
         headers: {
           "Accept": "application/json",
@@ -37,14 +40,16 @@ const Create = () => {
   const handleChange = (e) => {
     setItem({
       ...item,
-      [e.target.name]:e.target.value
+      [e.target.name]:e.target.value,
+      email: loginUserEmail,
     })
   }
 
   if(loginUserEmail) {
     return( 
       <div>
-      <h1>アイテム作成</h1>
+        {console.log(loginUserEmail)}
+      <h1 className="page-title">アイテム作成</h1>
       <form onSubmit={handleSubmit}>
         <input value={item.title} onChange={handleChange} type="text" name="title" placeholder="アイテム名" required/>
         <input value={item.price} onChange={handleChange} type="text" name="price" placeholder="価格" required/>

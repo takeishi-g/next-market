@@ -3,6 +3,8 @@
 import { useState } from "react"
 const api = process.env.API
 
+const url = process.env.NEXT_PUBLIC_URL
+
 
 const Register = () => {
 
@@ -21,7 +23,7 @@ const Register = () => {
   const handleSubmit =  async (e) => {
     e.preventDefault()
     try{
-      const responce = await fetch("http://localhost:3000/api/user/register",
+      const responce = await fetch(`${url}/api/user/register`,
       {
         method: "POST",
         headers: {
@@ -39,7 +41,7 @@ const Register = () => {
 
   return (
     <div>
-      <h1>ユーザー登録</h1>
+      <h1 className="page-title">ユーザー登録</h1>
       <form onSubmit={handleSubmit}>
         <input value={newUser.name} onChange={handleChange}  type="text" name="name" placeholder="名前" required/>
         <input value={newUser.email} onChange={handleChange} type="text" name="email" placeholder="メールアドレス" required/>
