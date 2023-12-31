@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-const api = process.env.API
 
 const url = process.env.NEXT_PUBLIC_URL
 
@@ -48,6 +47,7 @@ const Register = () => {
         <input value={newUser.password} onChange={handleChange} type="text" name="password" placeholder="パスワード" required />
         <button>登録</button>
       </form>
+      {console.log(newUser)}
     </div>
   )
 }
