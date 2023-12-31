@@ -6,6 +6,8 @@ const router = useRouter
 
 const { useState } = require("react")
 
+const url = process.env.NEXT_PIBLIC_URL
+
 const Login = () => {
   const [ login, setLogin ] = useState({
     email: "",
@@ -22,7 +24,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const responce = await fetch("http://localhost:3000/api/user/login",{
+      const responce = await fetch(`${url}/api/user/login`,{
         method: "POST",
         headers: {
           "Accept": "application/json",

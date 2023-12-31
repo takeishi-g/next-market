@@ -51,7 +51,7 @@ const UpdataItem = (context) => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `http://localhost:3000/api/item/update/${context.params.id}`,
+        `${url}/api/item/update/${context.params.id}`,
         {
           method: "PUT",
           headers: {
