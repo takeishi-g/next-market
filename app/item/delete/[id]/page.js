@@ -49,6 +49,7 @@ const DeleteItem = (context) => {
     try{
       const response = await fetch(`http://localhost:3000/api/item/delete/${context.params.id}`,{
         method: "DELETE",
+        mode: "cors",
         headers: {
           "Accept": "application/json",
           "Content-Type": "application/json",

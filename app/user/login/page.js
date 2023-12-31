@@ -26,6 +26,7 @@ const Login = () => {
     try {
       const responce = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/user/login`,{
         method: "POST",
+        mode: "cors",
         headers: {
           "Accept": "application/json",
           "Content-Type": "application/json"

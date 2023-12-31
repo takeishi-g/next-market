@@ -23,6 +23,7 @@ const Create = () => {
     try {
       const responce = await fetch(`${url}/api/item/create`, {
         method: "POST",
+        mode: "cors",
         headers: {
           "Accept": "application/json",
           "Content-Type": "application/json",

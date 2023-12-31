@@ -25,6 +25,7 @@ const Register = () => {
       const responce = await fetch(`${process.env.NEXT_PUBLIC_URL}}/api/user/register`,
       {
         method: "POST",
+        mode: "cors",
         headers: {
           "Accept": "application/json",
           "Content-Type": "application/json"

@@ -35,7 +35,6 @@ const UpdataItem = (context) => {
         email: singleItem.email
       });
       setEmail(singleItem.email);
-      console.log(item)
     };
     getSingleItem(context.params.id);
   }, [context]);
@@ -54,6 +53,7 @@ const UpdataItem = (context) => {
         `${url}/api/item/update/${context.params.id}`,
         {
           method: "PUT",
+          mode: "cors",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
