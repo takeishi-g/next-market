@@ -1,19 +1,17 @@
 import Link from "next/link"
 import Image from "next/image"
 
-const url = process.env.NEXT_PUBLIC_URL
+// const url = process.env.NEXT_PUBLIC_URL
 
 const getAllItems = async () => {
-  const response = await fetch(`${url}/api/item/readall`,{cache:"no-store"})
+  const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/item/readall`,{cache:"no-store"})
   const jsonData = await response.json()
-  // console.log(jsonData)
   const allItems = jsonData.allItems
   return allItems
 }
 
 const ReadAllItems = async() => {
   const allItems = await getAllItems()
-  console.log(allItems)
   return (
     <div className="grid-jcontainer-in">
       {allItems.map((item) => 

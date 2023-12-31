@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 
-const url = process.env.NEXT_PUBLIC_URL
+// const url = process.env.NEXT_PUBLIC_URL
 
 
 const Register = () => {
@@ -22,7 +22,7 @@ const Register = () => {
   const handleSubmit =  async (e) => {
     e.preventDefault()
     try{
-      const responce = await fetch(`${url}/api/user/register`,
+      const responce = await fetch(`${process.env.NEXT_PUBLIC_URL}}/api/user/register`,
       {
         method: "POST",
         headers: {
