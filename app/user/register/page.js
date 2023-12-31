@@ -32,7 +32,6 @@ const Register = () => {
         body: JSON.stringify(newUser),
       })
       const jsonData = await responce.json()
-      console.log(newUser)
       alert(jsonData.message)
     }catch(err){
       alert("ユーザー登録失敗")
