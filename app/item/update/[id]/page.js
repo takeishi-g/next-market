@@ -2,7 +2,7 @@
 const { useState, useEffect } = require("react");
 import useAuth from "@/app/utils/useAuth";
 
-const url = process.env.NEXT_PUBLIC_URL
+const url = process.env.NEXT_PUBLIC_URL;
 
 const UpdataItem = (context) => {
   // console.log(context)
@@ -17,13 +17,13 @@ const UpdataItem = (context) => {
 
   const [email, setEmail] = useState("");
 
+  const [lodading, setLoading] = useState(false);
 
   useEffect(() => {
     const getSingleItem = async (id) => {
-      const response = await fetch(
-        `${url}/api/item/readsingle/${id}`,
-        { cache: "no-store" }
-      );
+      const response = await fetch(`${url}/api/item/readsingle/${id}`, {
+        cache: "no-store",
+      });
       const jsonData = await response.json();
       const singleItem = jsonData.singleItem;
       setItem({
@@ -32,9 +32,10 @@ const UpdataItem = (context) => {
         price: singleItem.price,
         image: singleItem.image,
         description: singleItem.description,
-        email: singleItem.email
+        email: singleItem.email,
       });
       setEmail(singleItem.email);
+      setLoading(true);
     };
     getSingleItem(context.params.id);
   }, [context]);
@@ -54,9 +55,9 @@ const UpdataItem = (context) => {
         {
           method: "PUT",
           headers: {
-            "Accept": "application/json",
+            Accept: "application/json",
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
           body: JSON.stringify(item),
         }
@@ -67,22 +68,53 @@ const UpdataItem = (context) => {
       alert("アイテム編集失敗");
     }
   };
-
-  if (loginUserEmail === email) {
-    return (
-      <div>
-        <h1 className="page-title">アイテム編集</h1>
-        <form onSubmit={handleSubmit}>
-          <input value={item.title} onChange={handleChange} type="text" name="title" praceholder="アイテム名" required />
-          <input value={item.price} onChange={handleChange} type="text" name="price" praceholder="価格" required />
-          <input value={item.image} onChange={handleChange} type="text" name="image" praceholder="画像" required />
-          <textarea value={item.description} onChange={handleChange} name="description" rows="15" placeholder="商品説明" required ></textarea>
-          <button>編集</button>
-        </form>
-      </div>
-    );
-  } else {
-    return <h1>権限がありません</h1>
+  if (lodading) {
+    if (loginUserEmail === email) {
+      return (
+        <div>
+          <h1 className="page-title">アイテム編集</h1>
+          <form onSubmit={handleSubmit}>
+            <input
+              value={item.title}
+              onChange={handleChange}
+              type="text"
+              name="title"
+              praceholder="アイテム名"
+              required
+            />
+            <input
+              value={item.price}
+              onChange={handleChange}
+              type="text"
+              name="price"
+              praceholder="価格"
+              required
+            />
+            <input
+              value={item.image}
+              onChange={handleChange}
+              type="text"
+              name="image"
+              praceholder="画像"
+              required
+            />
+            <textarea
+              value={item.description}
+              onChange={handleChange}
+              name="description"
+              rows="15"
+              placeholder="商品説明"
+              required
+            ></textarea>
+            <button>編集</button>
+          </form>
+        </div>
+      );
+    } else {
+      return <h1>権限がありません</h1>;
+    }
+  }else {
+    return <h1>Loading...</h1>
   }
 };
 
